@@ -22,7 +22,7 @@ export const environment = {
     authDomain: 'siboadvance.firebaseapp.com',
     messagingSenderId: '512086210269',
   }, production: false,
-         //   urlApiUsers: 'https://localhost:7056/User',
+            urlApiUsers: 'http://localhost:5166/api/User',
          //   urlApiDeliveries: 'https://localhost:7245/api/Delivery',
          //   urlApiCampus: 'https://localhost:7245/',
          //   urlApiCourses: 'https://localhost:7245/api/Course',
