@@ -24,7 +24,7 @@ export const environment = {
   }, production: false,
             urlApiUsers: 'http://localhost:5166/api/User',
          //   urlApiDeliveries: 'https://localhost:7245/api/Delivery',
-         //   urlApiCampus: 'https://localhost:7245/',
+            urlApiEmployee: 'http://localhost:5246/api/Employees',
          //   urlApiCourses: 'https://localhost:7245/api/Course',
     };
 
