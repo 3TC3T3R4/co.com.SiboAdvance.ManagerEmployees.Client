@@ -1,26 +1,26 @@
-<!-- <div *ngIf="!render" class="spinner-grow text-bg-secondary position-absolute top-50 start-50 min-vw-75 min-vh-75"
+<div *ngIf="!render" class="spinner-grow text-bg-secondary position-absolute top-50 start-50 min-vw-75 min-vh-75"
   role="status">
 </div>
 <div *ngIf="render">
   <div class="row w-100">
     <div class="col col-lg-1 p-4 ps-5">
-      <sofka-back-button [routeBack]="routeDashboard"></sofka-back-button>
-    </div>
+      <!-- <sofka-back-button [routeBack]="routeDashboard"></sofka-back-button>-->
+    </div> 
     <div class="col p-4 pe-5">
       <p class="float-end">
         <button class="btn btn-blue" type="button" data-bs-toggle="collapse"
           data-bs-target="#createRegistrationCollapse" aria-expanded="false" aria-controls="collapseExample">
-          Create user
+          Create Employee
         </button>
       </p>
-      <sofka-input-search class="float-end pe-2 w-25" (onValue)="searchByType($event)"
-        placeholder="Search by email..."></sofka-input-search>
+      <!-- <sofka-input-search class="float-end pe-2 w-25" (onValue)="searchByType($event)"
+        placeholder="Search by email..."></sofka-input-search> -->
     </div>
   </div>
   <div class="col m-5 mt-0 text-king-blue">
     <div class="collapse mb-3" id="createRegistrationCollapse">
       <div class="card card-body">
-        <form id="frmCreateUser" (ngSubmit)="sendData()" [formGroup]="frmCreateUser"
+        <form id="frmCreateEmployee" (ngSubmit)="sendData()" [formGroup]="frmCreateEmployee"
           class="form-control bg-container-or-form mt-3 p-3 border-0 text-start text-king-blue shadow-lg">
           <div class="row mb-3 mt-2 align-items-center">
             <div class="col col-10 ms-lg-5">
@@ -32,11 +32,11 @@
                   <input class="form-control" type="text" name="email" id="email" placeholder="email"
                     formControlName="email" #email>
                   <p class="text-purple mt-1" id="create-user-email-required"
-                    *ngIf="frmCreateUser.get('email')?.hasError('required') && frmCreateUser.get('email')?.touched">
+                    *ngIf="frmCreateEmployee.get('email')?.hasError('required') && frmCreateEmployee.get('email')?.touched">
                     You must indicate the e-mail address.
                   </p>
                   <p class="text-purple mt-1" id="create-user-email-format"
-                    *ngIf="frmCreateUser.get('email')?.hasError('email') && frmCreateUser.get('email')?.touched">
+                    *ngIf="frmCreateEmployee.get('email')?.hasError('email') && frmCreateEmployee.get('email')?.touched">
                     The format does not match an e-mail address.
                   </p>
                 </div>
@@ -52,14 +52,14 @@
                     <option value="2">Trainee</option>
                   </select>
                   <p class="text-purple mt-1" id="create-user-role-required"
-                    *ngIf="frmCreateUser.get('role')?.hasError('required') && frmCreateUser.get('role')?.touched">
+                    *ngIf="frmCreateEmployee.get('role')?.hasError('required') && frmCreateEmployee.get('role')?.touched">
                     You must indicate the role.
                   </p>
                 </div>
               </div>
             </div>
             <div class="col ms-2">
-              <button type="submit" form="frmCreateUser" [disabled]="frmCreateUser.invalid" data-bs-toggle="collapse"
+              <button type="submit" form="frmCreateUser" [disabled]="frmCreateEmployee.invalid" data-bs-toggle="collapse"
                 data-bs-target="#createRegistrationCollapse" aria-expanded="false" aria-controls="collapseExample"
                 id="btnSubmitFormCreateUser" class="btn btn-action btn-lg shadow-lg bottom-0 end-0 w-auto">
                 <i class="bi bi-person-add"> Create</i>
@@ -71,19 +71,21 @@
     </div>
     <div class="row w-auto">
       <div class="col">
-        <h2 class="mb-4">Active users</h2>
+        <h2 class="mb-4">Active Employees</h2>
       </div>
       <div class=" table-responsive">
         <table class="table table-hover">
           <caption>
-            Active users
+            Active Employees
           </caption>
           <thead class="text-center">
             <tr class="text-king-blue">
-              <th scope="col">Email</th>
-              <th scope="col">Password</th>
-              <th scope="col">Role</th>
-              <th scope="col">Actions</th>
+              <th scope="col">subArea_id</th>
+              <th scope="col">typeDocument</th>
+              <th scope="col">number_ID</th>
+              <th scope="col">name</th>
+              <th scope="col">lastName</th>
+
             </tr>
           </thead>
           <tbody *ngIf="!searching" class="table-group-divider text-king-blue text-center">
@@ -92,14 +94,12 @@
             </tr>
             <ng-template #datosAll class="text-light">
               <tr
-                *ngFor="let user of usersList | slice:((page-1)*usersPerPageTable):((page-1)*usersPerPageTable+usersPerPageTable)">
-                <td>{{user.email}}</td>
-                <td><input type="password" class="form-control border-0 bg-transparent" name="passwordUserTable"
-                    id="{{user.uidUser}}" [value]="user.password">
-                </td>
-                <td>{{user.role | enumsNumberToStringPipe: 'role' }}</td>
-                <td><button class="btn btn-outline-teal" id=" toggleButton" (click)="togglePassword(user.uidUser)"><i
-                      class="bi bi-eye"></i></button></td>
+                *ngFor="let user of employeeList | slice:((page-1)*employeePerPageTable):((page-1)*employeePerPageTable+employeePerPageTable)">
+                <td>{{user.subArea_id}}</td>
+                <td>{{user.typeDocument}}</td>
+                <td>{{user.number_ID}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.lastName}}</td>
               </tr>
             </ng-template>
           </tbody>
@@ -109,14 +109,12 @@
             </tr>
             <ng-template #datosFiltered class="text-light">
               <tr
-                *ngFor="let user of filteredUsers | slice:((page-1)*usersPerPageTable):((page-1)*usersPerPageTable+usersPerPageTable)">
-                <td>{{user.email}}</td>
-                <td><input type="password" class="form-control border-0 bg-transparent" name="passwordUserTable"
-                    id="{{user.uidUser}}" [value]="user.password">
-                </td>
-                <td>{{user.role | enumsNumberToStringPipe: 'role' }}</td>
-                <td><button class="btn btn-outline-teal" id=" toggleButton" (click)="togglePassword(user.uidUser)"><i
-                      class="bi bi-eye"></i></button></td>
+                *ngFor="let user of filteredemployee | slice:((page-1)*employeePerPageTable):((page-1)*employeePerPageTable+employeePerPageTable)">
+                <td>{{user.subArea_id}}</td>
+                <td>{{user.typeDocument}}</td>
+                <td>{{user.number_ID}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.lastName}}</td>
               </tr>
             </ng-template>
           </tbody>
@@ -140,4 +138,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

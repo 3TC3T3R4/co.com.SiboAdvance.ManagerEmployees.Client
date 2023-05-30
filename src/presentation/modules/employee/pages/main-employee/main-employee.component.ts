@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GetAllEmployeeUseCase } from 'src/bussiness/useCases/employee/get-all-employee.usecase';
 import { EmployeeModel } from 'src/domain/models/employee/employee.model';
-import { CreateEmployeeUseCase } from '../../../../../bussiness/useCases/employee/create-employee.usecase';
+import { CreateEmployeeUseCase } from 'src/bussiness/useCases/employee/create-employee.usecase';
 
 @Component({
   selector: 'sibo-main-employee',
@@ -92,12 +92,13 @@ export class MainEmployeeComponent implements OnInit{
 }
 
 
-// searchByType(term: string): void {
-//   this.searching = true;
-//   this.filteredUsers = this.usersList.filter((user) =>
-//     user.email.toLowerCase().includes(term.toLowerCase())
-//   );
-// }
+searchByType(term: string): void {
+  this.searching = true;
+  this.filteredemployee = this.employeeList.filter((employee) =>
+    employee.name.toLowerCase().includes(term.toLowerCase()) ||
+    employee.number_ID
+  );
+}
 
 
 
