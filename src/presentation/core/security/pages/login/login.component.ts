@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { TaskserviceService } from '../../services/taskservice.service';
+import { AuthService } from '../../services/auth/auth.service';
+
 
 @Component({
   selector: 'sibo-login',
@@ -9,9 +10,7 @@ import { TaskserviceService } from '../../services/taskservice.service';
 export class LoginComponent {
 
 
-  constructor(private readonly auth$:TaskserviceService) {}
-
-
+  constructor(private readonly auth$:AuthService) {}
 
   authVariable():void{
 
