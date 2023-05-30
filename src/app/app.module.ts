@@ -10,6 +10,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { UserModule } from 'src/data/repositories/user/user.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -23,7 +25,11 @@ import { UserModule } from 'src/data/repositories/user/user.module';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    UserModule
+    UserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

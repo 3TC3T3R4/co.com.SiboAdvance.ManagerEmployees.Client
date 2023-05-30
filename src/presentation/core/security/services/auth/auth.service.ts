@@ -23,7 +23,7 @@ export class AuthService {
 
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      
+      this.router.navigate(['dashboard']);
     });
   }
 
@@ -52,10 +52,7 @@ export class AuthService {
       };
         this.createUserUseCase.execute(userToCreate).subscribe((res: any) => {
 
-
         });
-      
-      
       
       })
 

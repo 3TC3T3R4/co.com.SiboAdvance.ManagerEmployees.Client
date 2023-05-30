@@ -14,6 +14,25 @@ const routes: Routes = [
     // canActivate: [AngularFireAuthGuard],
     // data: { authGuardPipe: redirectLoggedInToDashboard },
   },
+  {
+    path: 'dashboard', // localhost:4200/dashboard
+    loadChildren: () =>
+      import('../presentation/core/main/dashboard.module').then(
+        (module) => module.DashboardModule
+      ),
+    // canActivate: [AngularFireAuthGuard],
+    // data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+
+  {
+    path: 'dashboard/employee',
+    loadChildren: () =>
+      import('src/presentation/modules/employee/employee.module').then(
+        (module) => module.EmployeeModule
+      ),
+    // canActivate: [AngularFireAuthGuard],
+    // data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
 
 
 
