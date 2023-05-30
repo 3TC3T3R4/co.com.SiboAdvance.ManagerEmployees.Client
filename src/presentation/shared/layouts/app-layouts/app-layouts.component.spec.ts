@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppLayoutComponent } from './app-layout.component';
+import { AppLayoutsComponent } from './app-layouts.component';
 
-describe('AppLayoutComponent', () => {
-  let component: AppLayoutComponent;
-  let fixture: ComponentFixture<AppLayoutComponent>;
+describe('AppLayoutsComponent', () => {
+  let component: AppLayoutsComponent;
+  let fixture: ComponentFixture<AppLayoutsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppLayoutComponent ]
+      declarations: [ AppLayoutsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AppLayoutComponent);
+    fixture = TestBed.createComponent(AppLayoutsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
