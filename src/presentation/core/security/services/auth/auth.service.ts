@@ -6,6 +6,7 @@ import * as auth from 'firebase/auth';
 import { CreateUserUseCase } from 'src/bussiness/useCases/user/create-user.usecase';
 import { CreateUserCommand } from 'src/domain/commands/user/newUserCommands';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,13 +15,15 @@ export class AuthService {
   
   
   constructor(private router: Router,private  httClient: HttpClient,
-    private afAuth: AngularFireAuth,private createUserUseCase: CreateUserUseCase) { }
+    private afAuth: AngularFireAuth,private createUserUseCase: CreateUserUseCase) { 
+    let userToCreate: CreateUserCommand;
+    }
 
 
 
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['Sibo/dashboard']);
+      
     });
   }
 
@@ -31,23 +34,23 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        this.router.navigate(['Sibo/dashboard']);
        console.log(result);
         localStorage.setItem('user', JSON.stringify(result.user?.email?.valueOf()));
         localStorage.setItem('name', JSON.stringify(result.user?.displayName?.valueOf()));
-        localStorage.setItem('uid', result.user?.uid?? '');
-        result.user?.getIdToken().then((token =>localStorage.setItem('token', token)));
+        localStorage.setItem('uid', JSON.stringify(result.user?.uid?.valueOf()));
         localStorage.setItem('prov', JSON.stringify(result.user?.providerId));
+        result.user?.getIdToken().then((token =>localStorage.setItem('token', token)));
        const token = localStorage.getItem('token') ?? '';
+      
 
-       const user = new CreateUserCommand(
+       const userToCreate = {
 
-        localStorage.getItem('uid') ?? '',
-        localStorage.getItem('user') ?? '{}',
-        localStorage.getItem('prov') ?? ''
-
-       );
-        this.createUserUseCase.execute(user).subscribe((res: any) => {
+        id_fire: localStorage.getItem('uid') as string ?? '',
+        user: localStorage.getItem('user') ?? '',
+        password: localStorage.getItem('prov') ?? ''
+        
+      };
+        this.createUserUseCase.execute(userToCreate).subscribe((res: any) => {
 
 
         });
@@ -68,7 +71,7 @@ export class AuthService {
       localStorage.removeItem('user');
       localStorage.removeItem('uid');
       localStorage.removeItem('token');
-      this.router.navigate(['EstacolNews/login']);
+      //this.router.navigate(['EstacolNews/login']);
     });
   }
 

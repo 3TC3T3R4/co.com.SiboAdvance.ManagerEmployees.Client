@@ -1,5 +1,5 @@
 export interface CreateUserCommand {
     id_fire: string;
-    email: string;
+    user: string;
     password: string;
 }

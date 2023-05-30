@@ -15,8 +15,8 @@ export class UserImplementationRepository extends UserRepository {
     super();
   }
 
-  createUserAsync(newUserCommand: CreateUserCommand): Observable<string> {
-    return this.http.post<string>(`${environment.urlApiUsers}`,
+  createUserAsync(newUserCommand: CreateUserCommand): Observable<CreateUserCommand> {
+    return this.http.post<CreateUserCommand>(`${environment.urlApiUsers}`,
       newUserCommand
     );
   }
