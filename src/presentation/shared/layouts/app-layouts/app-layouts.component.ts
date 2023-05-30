@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app-layouts.component.scss']
 })
 export class AppLayoutsComponent {
-
+  constructor() {
+   
+  }
 }

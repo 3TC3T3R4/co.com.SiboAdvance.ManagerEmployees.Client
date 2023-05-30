@@ -23,7 +23,7 @@ export class EmployeeImplementationRepository extends EmployeeRepository {
     updateEmployeeAsync(params: { idEmployee: number; employee: CreateEmployeeCommand; }): Observable<string> {
         return this.http.put<string>(`${environment.urlApiEmployee}UpdateEmployee?idEmployee=${params.idEmployee}`, params.employee);
     }
-    getAllEmployeesAsync(): Observable<EmployeeModel[]> {
+    getAllEmployeeAsync(): Observable<EmployeeModel[]> {
         return this.http.get<EmployeeModel[]>(`${environment.urlApiEmployee}GetAllEmployees
         `);
     }

@@ -23,7 +23,7 @@ export const environment = {
     messagingSenderId: '512086210269',
   }, production: false,
             urlApiUsers: 'http://localhost:5166/api/User',
-            urlApiEmployee: 'http://localhost:5246/api/Employees'
+            urlApiEmployee: 'http://localhost:5246/api/Employees/'
          
     };
 

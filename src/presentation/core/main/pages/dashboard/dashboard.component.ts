@@ -5,18 +5,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent  implements OnInit {
-  render!: boolean;
+export class DashboardComponent  {
+  routeMainEmployee: string[];
 
-  constructor(
-    //private toastr: ToastrService
-  ) {
-    // setTimeout(() => {
-    //   this.render = true;
-    // }, 400);
+
+  constructor() {
+    this.routeMainEmployee = ['dashboard/employee'];
   }
 
-  ngOnInit(): void {
-    // this.toastr.success('Hello world!', 'Toastr fun!');
-  }
+  
 }

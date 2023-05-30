@@ -1,1 +1,29 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark">
+    <div class="container-fluid ps-sm-4 mt-1">
+      <!-- <a class="navbar-brand text-light" (click)="redirectToDashboard()">
+        <strong>
+          <h2 class="title-header"><i class="bi bi-mortarboard"> MERSJ U </i> </h2>
+        </strong>
+      </a> -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" ddata-bs-target="#navbarNavDarkDropdown"
+        data-bs-offset="10,20" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse pe-sm-4" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+          <a class="nav-link active btn-header me-1" [routerLink]="routeMainUsers"
+            id="nav-link-users">
+            Users
+          </a>
+          <a  class="nav-link active btn-header me-1" [routerLink]="routeMainRegistrations"
+            id="nav-link-registrations">
+            Registrations
+          </a>
+        </ul>
+        <span class="text-light me-5"><strong></strong></span>
+        <!-- <button class="btn btn-purple" (click)="logout()"><i class="bi bi-box-arrow-right">
+            LogOut</i></button> -->
+      </div>
+    </div>
+  </nav>
+  

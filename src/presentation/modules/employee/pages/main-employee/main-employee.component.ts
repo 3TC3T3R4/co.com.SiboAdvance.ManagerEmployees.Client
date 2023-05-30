@@ -9,7 +9,7 @@ import { CreateEmployeeUseCase } from 'src/bussiness/useCases/employee/create-em
   templateUrl: './main-employee.component.html',
   styleUrls: ['./main-employee.component.scss']
 })
-export class MainEmployeeComponent implements OnInit{
+export class MainEmployeeComponent implements OnInit {
 
  //routes
  routeDashboard: string[];
@@ -19,7 +19,7 @@ export class MainEmployeeComponent implements OnInit{
  empty: boolean;
  employeeList!: EmployeeModel[];
 
- //search
+//search
  searching = false;
  filteredemployee!: EmployeeModel[];
 
@@ -31,12 +31,12 @@ export class MainEmployeeComponent implements OnInit{
 
  //forms
  frmCreateEmployee: FormGroup;
- //generatedPassword: string = '';
 
  constructor(
-   private getAllEmployeesUseCase: GetAllEmployeeUseCase, private createEmployeeUseCase: CreateEmployeeUseCase
-   //private $auth: AuthService
- ) {
+  private getAllEmployeeUseCase: GetAllEmployeeUseCase, private createEmployeeUseCase: CreateEmployeeUseCase
+) {
+
+
    this.routeDashboard = ['../'];
    this.empty = true;
 
@@ -59,20 +59,23 @@ export class MainEmployeeComponent implements OnInit{
    }, 500);
  }
 
- //#region create user
+//  //#region create user
  sendData() {
    this.createEmployeeUseCase.execute(
      this.frmCreateEmployee.getRawValue()
   );
    this.getAllEmployees();
  }
+  
  //#endregion
 
+ 
  //#region consults
  getAllEmployees() {
-   let subGetUsers = this.getAllEmployeesUseCase.execute().subscribe({
+   let subGetUsers = this.getAllEmployeeUseCase.execute().subscribe({
      next: (data) => {
        this.employeeList = data;
+       console.log(this.employeeList);
        this.empty = false;
      },
      error: (error) => {
@@ -83,6 +86,7 @@ export class MainEmployeeComponent implements OnInit{
      },
    });
  }
+ 
  //#endregion
  calculatePages(): void {
   this.totalPages = Math.ceil(this.employeeList.length / this.employeePerPageTable);

@@ -8,7 +8,7 @@ export abstract class EmployeeRepository {
 abstract createEmployeeAsync(
     newEmployeeCommand: CreateEmployeeCommand): Observable<string>;
 
-abstract getAllEmployeesAsync(): Observable<EmployeeModel[]>;
+abstract getAllEmployeeAsync(): Observable<EmployeeModel[]>;
 
 abstract updateEmployeeAsync(params: { idEmployee: number, employee: CreateEmployeeCommand}): Observable<string>;
 
