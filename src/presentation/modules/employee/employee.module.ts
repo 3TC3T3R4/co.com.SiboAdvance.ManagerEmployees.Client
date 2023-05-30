@@ -5,12 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { DashboardRoutingModule } from 'src/presentation/core/main/dashboard-routing.module';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { CreateEmployeeComponent } from './pages/create-employee/create-employee.component';
 
 
 
 @NgModule({
   declarations: [
     MainEmployeeComponent,
+    CreateEmployeeComponent,
     
   ],
   imports: [
@@ -18,7 +21,9 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     EmployeeRoutingModule,
     DashboardRoutingModule,
-    RouterModule
+    RouterModule,
+    ToastrModule.forRoot()
+    
   ]
 })
 export class EmployeeModule { }

@@ -33,6 +33,22 @@ const routes: Routes = [
     // canActivate: [AngularFireAuthGuard],
     // data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
+  {
+    path: 'dashboard/employee/create/employee',
+    loadChildren: () =>
+      import('src/presentation/modules/employee/employee.module').then(
+        (module) => module.EmployeeModule
+      ),
+    // canActivate: [AngularFireAuthGuard],
+    // data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+
+
+
+
+
+
+
 ];
 
 @NgModule({

@@ -3,6 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GetAllEmployeeUseCase } from 'src/bussiness/useCases/employee/get-all-employee.usecase';
 import { EmployeeModel } from 'src/domain/models/employee/employee.model';
 import { CreateEmployeeUseCase } from 'src/bussiness/useCases/employee/create-employee.usecase';
+import { GetEmployeeByIdUseCase } from 'src/bussiness/useCases/employee/get-employee.usecase';
+import { UpdateEmployeeUseCase } from 'src/bussiness/useCases/employee/update-employee.usecase';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sibo-main-employee',
@@ -13,31 +17,38 @@ export class MainEmployeeComponent implements OnInit {
 
  //routes
  routeDashboard: string[];
-
+ routerPostTask: string[];
  //variables
  render!: boolean;
  empty: boolean;
  employeeList!: EmployeeModel[];
-
+ employees_id!:number;
 //search
  searching = false;
  filteredemployee!: EmployeeModel[];
 
  //pagination
- employeePerPageTable: number = 10;
+ employeePerPageTable: number = 9;
  page: number = 1;
  pages: number[] = [];
  totalPages: number = 0;
 
  //forms
  frmCreateEmployee: FormGroup;
-
+ form: FormGroup;
+ //frmFormReactive: FormGroup;
  constructor(
-  private getAllEmployeeUseCase: GetAllEmployeeUseCase, private createEmployeeUseCase: CreateEmployeeUseCase
+  private getAllEmployeeUseCase: GetAllEmployeeUseCase,
+  private createEmployeeUseCase: CreateEmployeeUseCase,
+  private updateEmployeeUseCase:  UpdateEmployeeUseCase,
+  private getEmployeeByIdUseCase: GetEmployeeByIdUseCase,
+  private toastr: ToastrService,
+  private router: Router
 ) {
 
-
-   this.routeDashboard = ['../'];
+  this.routerPostTask = ['create/employee'];
+   this.routeDashboard = ['dashboard'];
+   this.render = true;
    this.empty = true;
 
    this.frmCreateEmployee = new FormGroup({
@@ -46,10 +57,22 @@ export class MainEmployeeComponent implements OnInit {
     number_ID: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
-   });
-   setTimeout(() => {
-     this.render = true;
-   }, 1800);
+    
+     });
+
+    this.form = new FormGroup({
+      subArea_id: new FormControl(),
+      typeDocument: new FormControl(),
+      number_ID: new FormControl(),
+      name: new FormControl(),
+      lastName: new FormControl(),
+    });
+
+
+
+
+
+
  }
 
  ngOnInit(): void {
@@ -103,7 +126,47 @@ searchByType(term: string): void {
     employee.number_ID
   );
 }
+modal(
+      employees_id: number,
+      subArea_idUpdate?: number,
+      typeDocumentUpdate?:string,
+      number_IDUpdate?:number ,
+      nameUpdate?:string ,
+      lastNameUpdate?: string
+): void {
+  this.employees_id = employees_id;
+  this.form.get('subArea_id')?.setValue(subArea_idUpdate);
+  this.form.get('typeDocument')?.setValue(typeDocumentUpdate);
+  this.form.get('number_ID')?.setValue(number_IDUpdate);
+  this.form.get('name')?.setValue(nameUpdate);
+  this.form.get('lastName')?.setValue(lastNameUpdate);
+}
 
-
-
+sendUpdate(EmployeeId: number): void {
+  this.getEmployeeByIdUseCase.execute(EmployeeId).subscribe({
+    next: (data) => {
+      let subUpdateTask = this.updateEmployeeUseCase
+        .execute({ idEmployee: EmployeeId, employee: this.form.getRawValue() })
+        .subscribe({
+          next: (data) => {
+            this.toastr.success('Employee updated successfully.', '', {
+              timeOut: 2500,
+              positionClass: 'toast-bottom-right',
+            });
+            this.getAllEmployees();
+          },
+          error: (error) => {
+            this.toastr.success('Employee updated successfully.', '', {
+              timeOut: 2500,
+              positionClass: 'toast-bottom-right',
+            });
+            this.getAllEmployees();
+          },
+          complete: () => {
+            subUpdateTask.unsubscribe();
+          },
+        });
+    },
+  });
+}
 }

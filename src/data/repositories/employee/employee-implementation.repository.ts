@@ -28,6 +28,6 @@ export class EmployeeImplementationRepository extends EmployeeRepository {
         `);
     }
     getEmployeeByIdAsync(idEmployee: number): Observable<EmployeeModel> {
-        return this.http.get<EmployeeModel>(`${environment.urlApiEmployee}Employees/${idEmployee}`);
+        return this.http.get<EmployeeModel>(`${environment.urlApiEmployee}${idEmployee}`);
     }
 }

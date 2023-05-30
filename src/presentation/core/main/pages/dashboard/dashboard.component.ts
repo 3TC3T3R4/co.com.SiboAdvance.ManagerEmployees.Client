@@ -10,7 +10,7 @@ export class DashboardComponent  {
 
 
   constructor() {
-    this.routeMainEmployee = ['dashboard/employee'];
+    this.routeMainEmployee = ['employee'];
   }
 
   
