@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TaskserviceService } from '../../services/taskservice.service';
 
 @Component({
   selector: 'sibo-login',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+
+
+  constructor(private readonly auth$:TaskserviceService) {}
+
+
+
+  authVariable():void{
+
+
+    this.auth$.GoogleAuth();
+
+
+  }
+
 
 }
