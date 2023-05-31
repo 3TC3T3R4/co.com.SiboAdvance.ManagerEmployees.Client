@@ -1,6 +1,6 @@
 
     
-     <select name="area" id="area" (change)="AreaChoose(areaslist.area_id)">
+     <!-- <select name="area" id="area" (change)="AreaChoose(areaslist.area_id)">
       <option selected disabled>Choose Area</option>
       <option *ngFor="let areaslist of areaslist" [ngValue]="areaslist.area_id">
         {{ areaslist?.name }}
@@ -13,7 +13,7 @@
           {{subAreasList.area_id}},
           {{subAreasList.name}},
           {{subAreasList.description}}</option>
-      </select>
+      </select> -->
    
     <form id="frmFormReactive" (ngSubmit)="sendData()" [formGroup]="frmFormReactive"
       class="text-bg-dark p-3 border-3 border-primary text-start">
