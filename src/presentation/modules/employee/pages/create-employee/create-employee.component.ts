@@ -79,7 +79,7 @@ export class CreateEmployeeComponent {
 
       },
       (error) => {
-        this.toastr.success('Employee created successfully.', '', {
+        this.toastr.error('Employee was no create.', '', {
           timeOut: 3500,
           positionClass: 'toast-bottom-right',
         });

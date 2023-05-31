@@ -1,3 +1,8 @@
+<!-- <div>
+        <input type="text" [placeholder]="placeholder" class="form-control" (keyup)="searchByType(txtInput.value)" #txtInput> 
+</div> -->
+
+
 <div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #5eeb0c">
     <div class="container-fluid">
@@ -14,12 +19,14 @@
           <li>
           <a class="nav-link active btn-header me-1" href="#">CERRAR SESION</a>  
           </li>
+          <li>
+            <input type="text" placeholder="Buscar por nombre" class="form-control" (keyup)="searchByType(txtInput.value)" #txtInput>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 </div>
-
     <div class="row w-auto">
       <div class="col">
         <h2 class="mb-4">Active Employees</h2>

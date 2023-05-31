@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GetAllEmployeeUseCase } from 'src/bussiness/useCases/employee/get-all-employee.usecase';
 import { EmployeeModel } from 'src/domain/models/employee/employee.model';
@@ -14,6 +14,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-employee.component.scss']
 })
 export class MainEmployeeComponent implements OnInit {
+
+
+  @Input()
+  placeholder: string = '';
+
+  @Output()
+  onValue = new EventEmitter<string>()
+
+  emitValue(value: string): void {
+    this.onValue.emit(value);
+  }
+
 
  //routes
  routeDashboard: string[];
@@ -123,11 +135,10 @@ export class MainEmployeeComponent implements OnInit {
 }
 
 
-searchByType(term: string): void {
+  searchByType(term: string): void {
   this.searching = true;
   this.filteredemployee = this.employeeList.filter((employee) =>
-    employee.name.toLowerCase().includes(term.toLowerCase()) ||
-    employee.number_ID
+    employee.name.toLowerCase().includes(term.toLowerCase())
   );
 }
 modal(
@@ -160,7 +171,7 @@ sendUpdate(EmployeeId: number): void {
             this.getAllEmployees();
           },
           error: (error) => {
-            this.toastr.success('Employee updated successfully.', '', {
+            this.toastr.error('Employee was no updated .', '', {
               timeOut: 2500,
               positionClass: 'toast-bottom-right',
             });
