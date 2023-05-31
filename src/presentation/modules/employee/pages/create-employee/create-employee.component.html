@@ -1,0 +1,95 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <div class="container-fluid">
+      <label class="navbar-brand">Manager Employees</label>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active btn-header me-1" [routerLink]="routeMainEmployee">HOME
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active btn-header me-1" [routerLink]="routeMainEmployee2">EMPLOYEES
+            </a>
+          </li>
+          <li>
+          <a class="nav-link active btn-header me-1" href="#">CERRAR SESION</a>  
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+     
+      <!-- <select  name="subAreasList" id="subAreasList">
+        <option selected disabled> Choose SubAreas</option>
+        <option *ngFor="let subAreasList of subAreasList">{{subAreasList.subArea_id}},
+          {{subAreasList.area_id}},
+          {{subAreasList.name}},
+          {{subAreasList.description}}</option>
+      </select> --> 
+   
+    <form id="frmFormReactive" (ngSubmit)="sendData()" [formGroup]="frmFormReactive"
+      class="text-bg-light p-3 border-3 border-primary text-start"> 
+      <div class="mb-3 row">
+        <label for="subArea_id" class="col-sm-2 col-form-label">subArea_id</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="subArea_id" placeholder="2"  formControlName="subArea_id"
+            name="subArea_id" required>
+            <div id="altoMensaje" *ngIf="frmFormReactive.get('subArea_id')?.hasError('required')
+         && frmFormReactive.get('subArea_id')?.touched">Campo requerido, ingresar por favor</div>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="typeDocument" class="col-sm-2 col-form-label">typeDocument</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="typeDocument" placeholder="2"  formControlName="typeDocument"
+            name="typeDocument" required>
+            <div id="altoMensaje" *ngIf="frmFormReactive.get('typeDocument')?.hasError('required')
+         && frmFormReactive.get('typeDocument')?.touched">Campo requerido, ingresar por favor</div>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="number_ID" class="col-sm-2 col-form-label">number_ID</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="number_ID" placeholder="2"  formControlName="number_ID"
+            name="number_ID" required>
+            <div id="altoMensaje" *ngIf="frmFormReactive.get('number_ID')?.hasError('required')
+         && frmFormReactive.get('number_ID')?.touched">Campo requerido, ingresar por favor</div>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="name" class="col-sm-2 col-form-label">name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" placeholder="2"  formControlName="name"
+            name="name" required>
+            <div id="altoMensaje" *ngIf="frmFormReactive.get('name')?.hasError('required')
+         && frmFormReactive.get('name')?.touched">Campo requerido, ingresar por favor</div>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="lastName" class="col-sm-2 col-form-label">lastName</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="lastName" placeholder="2"  formControlName="lastName"
+            name="lastName" required>
+            <div id="altoMensaje" *ngIf="frmFormReactive.get('lastName')?.hasError('required')
+         && frmFormReactive.get('lastName')?.touched">Campo requerido, ingresar por favor</div>
+        </div>
+      </div>
+      <button  type="submit" form="frmFormReactive" [disabled]="frmFormReactive.invalid">Crear Employe
+      </button>
+      </form>
+      
+      <select name="area" id="area">
+        <option selected disabled>Choose Area</option>
+        <option *ngFor="let areaslist of areaslist">
+          {{ areaslist?.name }}
+        </option>
+      </select>
+      
