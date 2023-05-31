@@ -15,6 +15,7 @@ import { LoginComponent } from 'src/presentation/core/security/pages/login/login
 import { EmployeeModule } from 'src/data/repositories/employee/employee.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AreaModule } from 'src/data/repositories/area/area.module';
+import { SubareaModule } from 'src/data/repositories/subarea/subarea.module';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { AreaModule } from 'src/data/repositories/area/area.module';
     HttpClientModule,
     UserModule,
     AreaModule,
+    SubareaModule,
     EmployeeModule,
     ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),

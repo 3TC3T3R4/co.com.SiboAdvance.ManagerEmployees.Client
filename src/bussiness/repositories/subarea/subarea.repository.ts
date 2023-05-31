@@ -6,7 +6,7 @@ export abstract class SubAreaRepository {
   
    
     
-    abstract getAllSubAreasByIdAreaAsync(areaID: number): Observable<SubAreaModel[]>;
+    abstract getAllSubAreasByIdAreaAsync(area_id: number): Observable<SubAreaModel[]>;
     
     
     

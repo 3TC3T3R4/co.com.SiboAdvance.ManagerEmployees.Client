@@ -7,8 +7,8 @@ export class GetAllSubAreaUseCase implements UseCase<number, SubAreaModel[]>{
 
     constructor(private repository: SubAreaRepository){}
 
-    execute(idEmployee: number): Observable<SubAreaModel[]> {
-        return this.repository.getAllSubAreasByIdAreaAsync(idEmployee);
+    execute(area_id: number): Observable<SubAreaModel[]> {
+        return this.repository.getAllSubAreasByIdAreaAsync(area_id);
     }
 
 }

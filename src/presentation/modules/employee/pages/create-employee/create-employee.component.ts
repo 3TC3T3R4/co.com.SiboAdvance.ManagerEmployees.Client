@@ -13,14 +13,13 @@ import { SubAreaModel } from 'src/domain/models/subarea/subarea.model';
   templateUrl: './create-employee.component.html',
   styleUrls: ['./create-employee.component.scss']
 })
-export class CreateEmployeeComponent  {
-  
+export class CreateEmployeeComponent {
+
+ 
   frmFormReactive : FormGroup;
   routergoBackMenu: string[];
   areaslist: AreaModel[] = [];
-  subareas: SubAreaModel[] = [];
-  selectedArea: any;
-
+  subAreasList: SubAreaModel[] = [];
   constructor(private gettAllSubAreas:GetAllSubAreaUseCase ,private getAllAreas: GetAllAreasUseCase ,private createEmployeeUseCase: CreateEmployeeUseCase, private router: Router,private toastr: ToastrService) {
 
     this.routergoBackMenu = ['dashboard'];
@@ -29,55 +28,40 @@ export class CreateEmployeeComponent  {
         typeDocument: new FormControl('', [Validators.required]),
         number_ID: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
-        
+        lastName: new FormControl('', [Validators.required])
     });
     
 
   }
 
-  // ngOnInit(): void {
-  //   this.loadAreas();
-  // }
+  ngOnInit(): void {
+    this.loadAllAreas();
+}
 
-  // loadAreas(){
-  //   let subGetAreas = this.getAllAreas.execute().subscribe({
-  //     next: (data) => {
-  //       this.areaslist = data;
-  //       console.log(this.areaslist);
-  //     },
-  //     error: (error) => {
-  //     },
-  //     complete: () => {
-  //       subGetAreas.unsubscribe();
-  //     },
-  //   });
-
-  // }
-
-  onAreaChange(areaId: number) {
-    if (areaId) {
-      this.loadSubareas(areaId);
-    } else {
-      this.subareas = []; // Si no se selecciona un área, vaciar las subáreas
-    }
-  }
-  
-  loadSubareas(areaId: number) {
-    let subGetSubareas = this.gettAllSubAreas.execute(areaId).subscribe({
+  loadAllAreas(){
+    let subGetAreas = this.getAllAreas.execute().subscribe({
       next: (data) => {
-        this.subareas = data;
-        console.log(this.subareas);
+        this.areaslist = data;
+        console.log(this.areaslist);
       },
       error: (error) => {
       },
       complete: () => {
-        subGetSubareas.unsubscribe();
+       // subGetAreas.unsubscribe();
       },
     });
-  }
-  
 
+  }
+
+  AreaChoose(area_id:number) {
+    alert("Entra al areachoose");
+    let final = this.gettAllSubAreas.execute(area_id).subscribe({ 
+      next: (datat) => {
+        this.subAreasList = datat;
+        console.log(this.subAreasList);
+      },
+   });
+  }
 
 
   sendData() {

@@ -20,7 +20,7 @@ export class SubAreaImplementationRepository extends SubAreaRepository {
     }
 
     
-    getAllSubAreasByIdAreaAsync(idArea: number): Observable<SubAreaModel[]> {
-        return this.http.get<SubAreaModel[]>(`${environment.urlApiSubAreas}${idArea}`);
+    getAllSubAreasByIdAreaAsync(area_id: number): Observable<SubAreaModel[]> {
+        return this.http.get<SubAreaModel[]>(`${environment.urlApiSubAreas}${area_id}`);
     }
 }

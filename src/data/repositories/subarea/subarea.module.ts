@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SubAreaRepository } from 'src/bussiness/repositories/subarea/subarea.repository';
 import { GetAllSubAreaUseCase } from 'src/bussiness/useCases/subarea/get-all-subarea-byidarea.usecase';
 import { SubAreaImplementationRepository } from './employee-implementation.repository';
+import { HttpClientModule } from '@angular/common/http';
 
 const GetAllSubAreaUseCaseFactory = (subAreaRepo: SubAreaRepository) =>
   new GetAllSubAreaUseCase(subAreaRepo);
@@ -21,7 +22,7 @@ export const GetAllSubAreaUseCaseProvider = {
       useClass: SubAreaImplementationRepository}
   ],
   imports: [
-    CommonModule
+    CommonModule,HttpClientModule
   ]
 })
 export class SubareaModule { }
