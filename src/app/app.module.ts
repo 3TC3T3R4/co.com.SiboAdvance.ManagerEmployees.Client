@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from 'src/presentation/core/security/pages/login/login.component';
 import { EmployeeModule } from 'src/data/repositories/employee/employee.module';
 import { ToastrModule } from 'ngx-toastr';
+import { AreaModule } from 'src/data/repositories/area/area.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule,
     UserModule,
+    AreaModule,
     EmployeeModule,
     ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),

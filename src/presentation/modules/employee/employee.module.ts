@@ -7,6 +7,7 @@ import { DashboardRoutingModule } from 'src/presentation/core/main/dashboard-rou
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateEmployeeComponent } from './pages/create-employee/create-employee.component';
+import { AreaRepository } from 'src/bussiness/repositories/area/area.repository';
 
 
 

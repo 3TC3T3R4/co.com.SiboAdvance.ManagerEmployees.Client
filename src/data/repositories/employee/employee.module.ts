@@ -7,6 +7,17 @@ import { CreateEmployeeUseCase } from 'src/bussiness/useCases/employee/create-em
 import { UpdateEmployeeUseCase } from 'src/bussiness/useCases/employee/update-employee.usecase';
 import { GetAllEmployeeUseCase } from 'src/bussiness/useCases/employee/get-all-employee.usecase';
 import { GetEmployeeByIdUseCase } from 'src/bussiness/useCases/employee/get-employee.usecase';
+import { AreaRepository } from 'src/bussiness/repositories/area/area.repository';
+import { GetAllAreasUseCase } from 'src/bussiness/useCases/area/get-all-area.usecase';
+
+
+const GetAllAreasUseCaseFactory = (areaRepo: AreaRepository) =>
+  new GetAllAreasUseCase(areaRepo);
+export const GetAllAreasUseCaseProvider = {
+  provide: GetAllAreasUseCase,
+  useFactory: GetAllAreasUseCaseFactory,
+  deps: [AreaRepository]
+};
 
 const CreateEmployrrUseCaseFactory = (employeeRepo: EmployeeRepository) =>
   new CreateEmployeeUseCase(employeeRepo);
@@ -48,6 +59,7 @@ export const GetEmployeeByIdUseCaseProvider = {
           UpdateUseCaseProvider,
           GetAllEmployeeUseCaseProvider,
           GetEmployeeByIdUseCaseProvider,
+          GetAllAreasUseCaseProvider,
           
         { 
           provide: EmployeeRepository,
