@@ -1,4 +1,25 @@
-<nav class="navbar bg-primary" data-bs-theme="dark">
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #5eeb0c">
+    <div class="container-fluid">
+      <label class="navbar-brand">Manager Employees</label>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active btn-header me-1" [routerLink]="routeMainEmployee2">HOME
+            </a>
+          </li>
+          <li>
+          <a class="nav-link active btn-header me-1" href="#">CERRAR SESION</a>  
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
     <div class="row w-auto">
       <div class="col">
         <h2 class="mb-4">Active Employees</h2>
@@ -37,7 +58,12 @@
                   (click)="modal(user.employees_id, user.subArea_id, user.typeDocument, user.number_ID, user.name, user.lastName)">
                   <i class="bi bi-pencil-square"></i>
                 </button>
-                </td>
+
+                <button type="button" [routerLink]="routerPostTask"class="btn btn-sm btn-outline-teal me-1 shadow">
+                  <i class="bi bi-person-plus"></i>
+            </button>
+
+                <td>
               </tr>
             </ng-template>
           </tbody>
@@ -58,6 +84,9 @@
                     (click)="modal(user.employees_id, user.subArea_id, user.typeDocument, user.number_ID, user.name, user.lastName)">
                     <i class="bi bi-pencil-square"></i>
                   </button>
+                  <button type="button" [routerLink]="routerPostTask"class="btn btn-sm btn-outline-teal me-1 shadow">
+                    <i class="bi bi-person-plus"></i>
+              </button>
                 </td>
               </tr>
             </ng-template>
@@ -81,10 +110,6 @@
         </nav>
       </div>
     </div>
-    
-    <button type="button" [routerLink]="routerPostTask">
-      CREAR Employee
-    </button>
     
     <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">

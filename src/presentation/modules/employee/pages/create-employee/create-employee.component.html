@@ -1,5 +1,28 @@
-
-<nav class="navbar bg-primary" data-bs-theme="dark">
+<div>
+  <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <div class="container-fluid">
+      <label class="navbar-brand">Manager Employees</label>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active btn-header me-1" [routerLink]="routeMainEmployee">HOME
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active btn-header me-1" [routerLink]="routeMainEmployee2">EMPLOYEES
+            </a>
+          </li>
+          <li>
+          <a class="nav-link active btn-header me-1" href="#">CERRAR SESION</a>  
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
      <!-- <select name="area" id="area" (change)="AreaChoose(areaslist.area_id)">
       <option selected disabled>Choose Area</option>
       <option *ngFor="let areaslist of areaslist" [ngValue]="areaslist.area_id">
@@ -16,7 +39,7 @@
       </select> -->
    
     <form id="frmFormReactive" (ngSubmit)="sendData()" [formGroup]="frmFormReactive"
-      class="text-bg-dark p-3 border-3 border-primary text-start">
+      class="text-bg-light p-3 border-3 border-primary text-start">
       
   
       <!--       

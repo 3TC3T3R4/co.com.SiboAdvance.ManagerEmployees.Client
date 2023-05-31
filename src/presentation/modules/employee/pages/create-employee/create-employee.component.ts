@@ -15,13 +15,16 @@ import { SubAreaModel } from 'src/domain/models/subarea/subarea.model';
 })
 export class CreateEmployeeComponent {
 
- 
+  routeMainEmployee: string[];
+  routeMainEmployee2: string[];
   frmFormReactive : FormGroup;
   routergoBackMenu: string[];
   areaslist: AreaModel[] = [];
   subAreasList: SubAreaModel[] = [];
   constructor(private gettAllSubAreas:GetAllSubAreaUseCase ,private getAllAreas: GetAllAreasUseCase ,private createEmployeeUseCase: CreateEmployeeUseCase, private router: Router,private toastr: ToastrService) {
 
+    this.routeMainEmployee = ['../../../'];
+    this.routeMainEmployee2 = ['../../'];
     this.routergoBackMenu = ['dashboard'];
     this.frmFormReactive = new FormGroup({
         subArea_id: new FormControl('', [Validators.required]),

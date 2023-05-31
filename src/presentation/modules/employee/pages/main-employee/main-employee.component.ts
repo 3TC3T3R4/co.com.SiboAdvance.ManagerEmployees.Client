@@ -18,6 +18,8 @@ export class MainEmployeeComponent implements OnInit {
  //routes
  routeDashboard: string[];
  routerPostTask: string[];
+ routeMainEmployee2: string[];
+
  //variables
  render!: boolean;
  empty: boolean;
@@ -47,7 +49,9 @@ export class MainEmployeeComponent implements OnInit {
 ) {
 
   this.routerPostTask = ['create/employee'];
-   this.routeDashboard = ['dashboard'];
+  this.routeDashboard = ['dashboard'];
+  this.routeMainEmployee2 = ['../'];
+    
    this.render = true;
    this.empty = true;
 
