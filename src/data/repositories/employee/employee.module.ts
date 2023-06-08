@@ -10,23 +10,7 @@ import { GetEmployeeByIdUseCase } from 'src/bussiness/useCases/employee/get-empl
 import { AreaRepository } from 'src/bussiness/repositories/area/area.repository';
 import { GetAllAreasUseCase } from 'src/bussiness/useCases/area/get-all-area.usecase';
 import { SubAreaRepository } from 'src/bussiness/repositories/subarea/subarea.repository';
-import { GetAllSubAreaUseCase } from 'src/bussiness/useCases/subarea/get-all-subarea-byidarea.usecase';
 
-
-const GetAllAreasUseCaseFactory = (areaRepo: AreaRepository) =>
-  new GetAllAreasUseCase(areaRepo);
-export const GetAllAreasUseCaseProvider = {
-  provide: GetAllAreasUseCase,
-  useFactory: GetAllAreasUseCaseFactory,
-  deps: [AreaRepository]
-};
-const GetAllSubAreaUseCaseFactory = (subAreaRepo: SubAreaRepository) =>
-  new GetAllSubAreaUseCase(subAreaRepo);
-export const GetAllSubAreaUseCaseProvider = {
-  provide: GetAllSubAreaUseCase,
-  useFactory: GetAllSubAreaUseCaseFactory,
-  deps: [SubAreaRepository]
-};
 const CreateEmployrrUseCaseFactory = (employeeRepo: EmployeeRepository) =>
   new CreateEmployeeUseCase(employeeRepo);
 export const CreateEmployeeCaseProvider = {
@@ -67,9 +51,6 @@ export const GetEmployeeByIdUseCaseProvider = {
           UpdateUseCaseProvider,
           GetAllEmployeeUseCaseProvider,
           GetEmployeeByIdUseCaseProvider,
-          GetAllAreasUseCaseProvider,
-          GetAllSubAreaUseCaseProvider,
-          
         { 
           provide: EmployeeRepository,
           useClass: EmployeeImplementationRepository},

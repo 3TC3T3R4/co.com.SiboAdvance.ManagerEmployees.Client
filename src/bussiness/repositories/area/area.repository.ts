@@ -4,5 +4,11 @@ import { AreaModel } from "src/domain/models/area/area.model";
 export abstract class AreaRepository {
   
     abstract getAllAreasAsync(): Observable<AreaModel[]>;
-    
+ 
+    abstract getAreaByIdAsync(id: number): Observable<AreaModel>;
+
+
+
+
+
 }

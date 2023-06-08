@@ -1,7 +1,3 @@
-<!-- <div>
-        <input type="text" [placeholder]="placeholder" class="form-control" (keyup)="searchByType(txtInput.value)" #txtInput> 
-</div> -->
-
 
 <div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #5eeb0c">
@@ -62,7 +58,7 @@
                 <td>
                 <button type="button" class="btn btn-sm btn-outline-orange me-1 shadow" data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
-                  (click)="modal(user.employees_id, user.subArea_id, user.typeDocument, user.number_ID, user.name, user.lastName)">
+                  (click)="modal(user.employees_id, user.typeDocument, user.number_ID, user.name, user.lastName)">
                   <i class="bi bi-pencil-square"></i>
                 </button>
 
@@ -88,7 +84,7 @@
                 <td>
                   <button type="button" class="btn btn-sm btn-outline-orange me-1 shadow" data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
-                    (click)="modal(user.employees_id, user.subArea_id, user.typeDocument, user.number_ID, user.name, user.lastName)">
+                    (click)="modal(user.employees_id, user.typeDocument, user.number_ID, user.name, user.lastName)">
                     <i class="bi bi-pencil-square"></i>
                   </button>
                   <button type="button" [routerLink]="routerPostTask"class="btn btn-sm btn-outline-teal me-1 shadow">
@@ -130,15 +126,29 @@
           <div class="modal-body border-0">
             <form id="form" (ngSubmit)="sendUpdate(employees_id)" [formGroup]="form">
               
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <input class="form-control" type="number" name="subArea_id" id="subArea_id" formControlName="subArea_id"
                   placeholder="2..1" />
                 <p class="text-purple mt-1" *ngIf="form.get('subArea_id')?.hasError('required') && form.get('subArea_id')?.touched">
                   subArea_id is required.
                 </p>
+              </div> -->
+
+
+          
+              <div class="mb-3 row">
+                <label for="subArea_id" class="col-sm-2 col-form-label">Sub Area</label>
+                <div class="col-sm-10">
+                <select  name="subArea_id" id="subArea_id" class="form-control" (change)="SubAreaChoose($event)">
+                <option selected disabled> Choose SubAreas</option>
+                <option *ngFor="let subAreasList of subAreasList" [value]="subAreasList.subArea_id">
+                  {{subAreasList.name}}
+                </select>  
+                </div>
               </div>
-              
+
               <div class="mb-3">
+                <label for="tipo de documento" class="col-sm-2 col-form-label">Tipo de documento</label>
                 <input class="form-control" type="text" name="typeDocument" id="typeDocument" formControlName="typeDocument"
                   placeholder="2..1" />
                 <p class="text-purple mt-1" *ngIf="form.get('typeDocument')?.hasError('required') && form.get('typeDocument')?.touched">
@@ -147,6 +157,7 @@
               </div>
 
               <div class="mb-3">
+                <label for="numero de documento" class="col-sm-2 col-form-label">Numero de documento</label>
                 <input class="form-control" type="number" name="number_ID" id="number_ID" formControlName="number_ID"
                   placeholder="2..1" />
                 <p class="text-purple mt-1" *ngIf="form.get('number_ID')?.hasError('required') && form.get('number_ID')?.touched">
@@ -155,6 +166,7 @@
               </div>
 
               <div class="mb-3">
+                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                 <input class="form-control" type="text" name="name" id="name" formControlName="name"
                   placeholder="2..1" />
                 <p class="text-purple mt-1" *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
@@ -163,6 +175,8 @@
               </div>
 
               <div class="mb-3">
+                <label for="Apellido" class="col-sm-2 col-form-label">Apellidos</label>
+
                 <input class="form-control" type="text" name="lastName" id="lastName" formControlName="lastName"
                   placeholder="2..1" />
                 <p class="text-purple mt-1" *ngIf="form.get('lastName')?.hasError('required') && form.get('lastName')?.touched">

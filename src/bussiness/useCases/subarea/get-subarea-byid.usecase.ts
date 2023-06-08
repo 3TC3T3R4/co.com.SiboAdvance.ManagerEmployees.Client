@@ -3,12 +3,12 @@ import { UseCase } from "src/base/utils/IUseCase";
 import { SubAreaRepository } from "src/bussiness/repositories/subarea/subarea.repository";
 import { SubAreaModel } from "src/domain/models/subarea/subarea.model";
 
-export class GetAllSubAreaByIdAreaUseCase implements UseCase<number, SubAreaModel[]>{
+export class GetSubAreaByIdUseCase implements UseCase<number, SubAreaModel>{
 
     constructor(private repository: SubAreaRepository){}
 
-    execute(area_id: number): Observable<SubAreaModel[]> {
-        return this.repository.getAllSubAreasByIdAreaAsync(area_id);
+    execute(idSubArea: number): Observable<SubAreaModel> {
+        return this.repository.getSubAreaByIdAsync(idSubArea);
     }
 
 }

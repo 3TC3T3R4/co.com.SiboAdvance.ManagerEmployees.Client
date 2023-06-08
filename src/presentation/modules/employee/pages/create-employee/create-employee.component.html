@@ -24,29 +24,15 @@
   </nav>
 </div>
      
-      <!-- <select  name="subAreasList" id="subAreasList">
-        <option selected disabled> Choose SubAreas</option>
-        <option *ngFor="let subAreasList of subAreasList">{{subAreasList.subArea_id}},
-          {{subAreasList.area_id}},
-          {{subAreasList.name}},
-          {{subAreasList.description}}</option>
-      </select> --> 
+      
    
     <form id="frmFormReactive" (ngSubmit)="sendData()" [formGroup]="frmFormReactive"
       class="text-bg-light p-3 border-3 border-primary text-start"> 
+
       <div class="mb-3 row">
-        <label for="subArea_id" class="col-sm-2 col-form-label">subArea_id</label>
+        <label for="typeDocument" class="col-sm-2 col-form-label">Tipo de documento </label>
         <div class="col-sm-10">
-          <input type="number" class="form-control" id="subArea_id" placeholder="2"  formControlName="subArea_id"
-            name="subArea_id" required>
-            <div id="altoMensaje" *ngIf="frmFormReactive.get('subArea_id')?.hasError('required')
-         && frmFormReactive.get('subArea_id')?.touched">Campo requerido, ingresar por favor</div>
-        </div>
-      </div>
-      <div class="mb-3 row">
-        <label for="typeDocument" class="col-sm-2 col-form-label">typeDocument</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="typeDocument" placeholder="2"  formControlName="typeDocument"
+          <input type="text" class="form-control" id="typeDocument" placeholder="C.C-TI"  formControlName="typeDocument"
             name="typeDocument" required>
             <div id="altoMensaje" *ngIf="frmFormReactive.get('typeDocument')?.hasError('required')
          && frmFormReactive.get('typeDocument')?.touched">Campo requerido, ingresar por favor</div>
@@ -54,9 +40,9 @@
       </div>
 
       <div class="mb-3 row">
-        <label for="number_ID" class="col-sm-2 col-form-label">number_ID</label>
+        <label for="number_ID" class="col-sm-2 col-form-label">Numero de documento</label>
         <div class="col-sm-10">
-          <input type="number" class="form-control" id="number_ID" placeholder="2"  formControlName="number_ID"
+          <input type="number" class="form-control" id="number_ID" placeholder="1015465"  formControlName="number_ID"
             name="number_ID" required>
             <div id="altoMensaje" *ngIf="frmFormReactive.get('number_ID')?.hasError('required')
          && frmFormReactive.get('number_ID')?.touched">Campo requerido, ingresar por favor</div>
@@ -64,9 +50,9 @@
       </div>
 
       <div class="mb-3 row">
-        <label for="name" class="col-sm-2 col-form-label">name</label>
+        <label for="name" class="col-sm-2 col-form-label">Nombre</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" placeholder="2"  formControlName="name"
+          <input type="text" class="form-control" id="name" placeholder="Estevan"  formControlName="name"
             name="name" required>
             <div id="altoMensaje" *ngIf="frmFormReactive.get('name')?.hasError('required')
          && frmFormReactive.get('name')?.touched">Campo requerido, ingresar por favor</div>
@@ -74,22 +60,42 @@
       </div>
 
       <div class="mb-3 row">
-        <label for="lastName" class="col-sm-2 col-form-label">lastName</label>
+        <label for="lastName" class="col-sm-2 col-form-label">Apellidos</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="lastName" placeholder="2"  formControlName="lastName"
+          <input type="text" class="form-control" id="lastName" placeholder="Tangarife Correa"  formControlName="lastName"
             name="lastName" required>
             <div id="altoMensaje" *ngIf="frmFormReactive.get('lastName')?.hasError('required')
          && frmFormReactive.get('lastName')?.touched">Campo requerido, ingresar por favor</div>
         </div>
       </div>
+
+      <div class="mb-3 row">
+        <label for="area" class="col-sm-2 col-form-label">Area</label>
+        <div class="col-sm-10">
+          <select name="area" id="area" class="form-control" (change)="AreaChoose($event)">
+            <option selected disabled>Choose Area</option>
+            <option *ngFor="let areaslist of areaslist" [value]="areaslist?.area_id">
+              {{ areaslist?.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="subArea_id" class="col-sm-2 col-form-label">Sub Area</label>
+        <div class="col-sm-10">
+        <select  name="subArea_id" id="subArea_id" class="form-control" (change)="SubAreaChoose($event)">
+        <option selected disabled> Choose SubAreas</option>
+        <option *ngFor="let subAreasList of subAreasList" [value]="subAreasList.subArea_id">
+          {{subAreasList.name}}
+        </select>  
+        </div>
+      </div>
+      
+
       <button  type="submit" form="frmFormReactive" [disabled]="frmFormReactive.invalid">Crear Employe
       </button>
       </form>
       
-      <select name="area" id="area">
-        <option selected disabled>Choose Area</option>
-        <option *ngFor="let areaslist of areaslist">
-          {{ areaslist?.name }}
-        </option>
-      </select>
       
+     
