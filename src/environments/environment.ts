@@ -26,6 +26,7 @@ export const environment = {
             urlApiEmployee: 'http://localhost:5246/api/Employees/',
             urlApiAreas: 'http://localhost:5246/api/Areas/',
             urlApiSubAreas: 'http://localhost:5246/api/SubAreas/',
+            urlApiSubAreaById: 'http://localhost:5246/SubAreasId/',
     };
 
   

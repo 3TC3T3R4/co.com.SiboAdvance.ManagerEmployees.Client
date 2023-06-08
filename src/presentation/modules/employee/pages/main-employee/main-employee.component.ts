@@ -7,6 +7,8 @@ import { GetEmployeeByIdUseCase } from 'src/bussiness/useCases/employee/get-empl
 import { UpdateEmployeeUseCase } from 'src/bussiness/useCases/employee/update-employee.usecase';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { GetAllSubAreaUseCase } from 'src/bussiness/useCases/subarea/get-all-subarea.usecase';
+import { SubAreaModel } from 'src/domain/models/subarea/subarea.model';
 
 @Component({
   selector: 'sibo-main-employee',
@@ -37,12 +39,13 @@ export class MainEmployeeComponent implements OnInit {
  empty: boolean;
  employeeList!: EmployeeModel[];
  employees_id!:number;
+ subAreasList!: SubAreaModel[];
 //search
  searching = false;
  filteredemployee!: EmployeeModel[];
 
  //pagination
- employeePerPageTable: number = 9;
+ employeePerPageTable: number = 10;
  page: number = 1;
  pages: number[] = [];
  totalPages: number = 0;
@@ -57,7 +60,8 @@ export class MainEmployeeComponent implements OnInit {
   private updateEmployeeUseCase:  UpdateEmployeeUseCase,
   private getEmployeeByIdUseCase: GetEmployeeByIdUseCase,
   private toastr: ToastrService,
-  private router: Router
+  private router: Router,
+  private getAllSubAreas: GetAllSubAreaUseCase
 ) {
 
   this.routerPostTask = ['create/employee'];
@@ -93,6 +97,11 @@ export class MainEmployeeComponent implements OnInit {
 
  ngOnInit(): void {
    this.getAllEmployees();
+   this.getAllSubAreas.execute().subscribe({
+      next: (data) => {
+        this.subAreasList = data;
+  }
+  });
    setTimeout(() => {
      this.calculatePages();
    }, 500);
@@ -143,19 +152,33 @@ export class MainEmployeeComponent implements OnInit {
 }
 modal(
       employees_id: number,
-      subArea_idUpdate?: number,
       typeDocumentUpdate?:string,
       number_IDUpdate?:number ,
       nameUpdate?:string ,
       lastNameUpdate?: string
 ): void {
   this.employees_id = employees_id;
-  this.form.get('subArea_id')?.setValue(subArea_idUpdate);
   this.form.get('typeDocument')?.setValue(typeDocumentUpdate);
   this.form.get('number_ID')?.setValue(number_IDUpdate);
   this.form.get('name')?.setValue(nameUpdate);
   this.form.get('lastName')?.setValue(lastNameUpdate);
 }
+
+
+
+SubAreaChoose(areaModel: any){
+  let selectedValue = (areaModel.target as HTMLSelectElement).value;
+  let Subarea_id = parseInt(selectedValue);
+   this.form.patchValue({
+    subArea_id: Subarea_id
+   });
+   //alert(this.frmFormReactive.getRawValue().subArea_id);
+}
+
+
+
+
+
 
 sendUpdate(EmployeeId: number): void {
   this.getEmployeeByIdUseCase.execute(EmployeeId).subscribe({

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { GetAllAreasUseCase } from 'src/bussiness/useCases/area/get-all-area.usecase';
+import { GetAreaByIdUseCase } from 'src/bussiness/useCases/area/get-area-byid.usecase';
 import { CreateEmployeeUseCase } from 'src/bussiness/useCases/employee/create-employee.usecase';
-import { GetAllSubAreaUseCase } from 'src/bussiness/useCases/subarea/get-all-subarea-byidarea.usecase';
+import { GetAllSubAreaByIdAreaUseCase } from 'src/bussiness/useCases/subarea/get-all-subarea-byidarea.usecase';
+import { AreaModule } from 'src/data/repositories/area/area.module';
 import { AreaModel } from 'src/domain/models/area/area.model';
 import { SubAreaModel } from 'src/domain/models/subarea/subarea.model';
 
@@ -15,19 +17,20 @@ import { SubAreaModel } from 'src/domain/models/subarea/subarea.model';
 })
 export class CreateEmployeeComponent {
 
+
   routeMainEmployee: string[];
   routeMainEmployee2: string[];
   frmFormReactive : FormGroup;
   routergoBackMenu: string[];
   areaslist: AreaModel[] = [];
   subAreasList: SubAreaModel[] = [];
-  constructor(private gettAllSubAreas:GetAllSubAreaUseCase ,private getAllAreas: GetAllAreasUseCase ,private createEmployeeUseCase: CreateEmployeeUseCase, private router: Router,private toastr: ToastrService) {
+  constructor(private getAllSubAreasByIdArea: GetAllSubAreaByIdAreaUseCase, private getAreaById: GetAreaByIdUseCase,private getAllAreas: GetAllAreasUseCase ,private createEmployeeUseCase: CreateEmployeeUseCase, private router: Router,private toastr: ToastrService) {
 
     this.routeMainEmployee = ['../../../'];
     this.routeMainEmployee2 = ['../../'];
     this.routergoBackMenu = ['dashboard'];
     this.frmFormReactive = new FormGroup({
-        subArea_id: new FormControl('', [Validators.required]),
+        subArea_id: new FormControl(),
         typeDocument: new FormControl('', [Validators.required]),
         number_ID: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
@@ -56,18 +59,32 @@ export class CreateEmployeeComponent {
 
   }
 
-  AreaChoose(area_id:number) {
-    alert("Entra al areachoose");
-    let final = this.gettAllSubAreas.execute(area_id).subscribe({ 
-      next: (datat) => {
-        this.subAreasList = datat;
+  AreaChoose(areaModel: any){
+    let selectedValue = (areaModel.target as HTMLSelectElement).value;
+    let area_id = parseInt(selectedValue);
+    
+     this.getAllSubAreasByIdArea.execute(area_id).subscribe({
+      next: (data) => {
+        this.subAreasList = data;
         console.log(this.subAreasList);
-      },
-   });
+      }
+    });
+    
   }
 
 
+  SubAreaChoose(areaModel: any){
+    let selectedValue = (areaModel.target as HTMLSelectElement).value;
+    let Subarea_id = parseInt(selectedValue);
+     this.frmFormReactive.patchValue({
+      subArea_id: Subarea_id
+     });
+     //alert(this.frmFormReactive.getRawValue().subArea_id);
+  }
+
   sendData() {
+    
+    console.log(this.frmFormReactive.getRawValue());
     this.createEmployeeUseCase.execute(
       this.frmFormReactive.getRawValue()
    ).subscribe(
@@ -76,7 +93,7 @@ export class CreateEmployeeComponent {
           timeOut: 3500,
           positionClass: 'toast-bottom-right',
         });
-
+        this.router.navigate(this.routergoBackMenu);
       },
       (error) => {
         this.toastr.error('Employee was no create.', '', {

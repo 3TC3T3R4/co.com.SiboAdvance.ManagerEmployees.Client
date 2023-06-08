@@ -24,5 +24,9 @@ export class AreaImplementationRepository extends AreaRepository {
         return this.http.get<AreaModel[]>(`${environment.urlApiAreas}GetAllAreas
         `);
     }
+
+    getAreaByIdAsync(id: number): Observable<AreaModel> {
+        return this.http.get<AreaModel>(`${environment.urlApiAreas}${id}`);
+    }
     
 }
